@@ -1,0 +1,456 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+/* colors */
+$primary1: hsl(24, 70%, 99%);
+$primary2: hsl(24, 83.3%, 97.6%);
+$primary3: hsl(24, 100%, 95.3%);
+$primary4: hsl(25, 100%, 92.2%);
+$primary5: hsl(25, 100%, 88.2%);
+$primary6: hsl(25, 100%, 82.8%);
+$primary7: hsl(24, 100%, 75.3%);
+$primary8: hsl(24, 94.5%, 64.3%);
+$primary9: hsl(24, 94%, 50%);
+$primary10: hsl(24, 100%, 46.5%);
+$primary11: hsl(24, 100%, 37%);
+$primary12: hsl(15, 60%, 17%);
+$secondary1: hsl(206, 100%, 99.2%);
+$secondary2: hsl(210, 100%, 98%);
+$secondary3: hsl(209, 100%, 96.5%);
+$secondary4: hsl(210, 98.8%, 94%);
+$secondary5: hsl(209, 95%, 90.1%);
+$secondary6: hsl(209, 81.2%, 84.5%);
+$secondary7: hsl(208, 77.5%, 76.9%);
+$secondary8: hsl(206, 81.9%, 65.3%);
+$secondary9: hsl(206, 100%, 50%);
+$secondary10: hsl(208, 100%, 47.3%);
+$secondary11: hsl(211, 100%, 43.2%);
+$secondary12: hsl(211, 100%, 15%);
+
+#root {
+  width: 100%;
+  height: 100vh;
+  background-color: $primary1;
+}
+// Audio
+.audio {
+  display: none;
+}
+
+/** Ripple Button **/
+.ripple {
+  /* Button style */
+  border: none;
+  cursor: pointer;
+  outline: none;
+  background-color: transparent;
+  padding: 5px;
+
+  background-position: center;
+  transition: background 0.5s ease;
+  &:hover {
+    background: radial-gradient(circle, transparent 1%, $primary2 1%)
+      center/15000%;
+  }
+  &:active {
+    background-color: $primary3;
+    background-size: 100%;
+    transition: background 200ms;
+  }
+}
+
+// close btn
+%close-btn {
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  fill: #7f7f7f;
+  // background-color: #e3ece6;
+  transition: background-color 500ms ease;
+  &:hover {
+    background-color: $primary2;
+  }
+  &:active {
+    background-color: $primary3;
+  }
+}
+
+/* container */
+.container {
+  width: 90%;
+  margin: 0 auto;
+  font-family: sans-serif;
+  @media screen and (min-width: 650px) {
+    width: 85%;
+  }
+  @media screen and (min-width: 1080px) {
+    width: 80%;
+  }
+}
+
+// ************** Playlist *************  //
+.playlist {
+  height: 100vh;
+  overflow: hidden;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    width: 0;
+  }
+}
+
+/* Banner */
+.banner-wrapper {
+  position: relative;
+  margin: 1rem 0 3rem 0;
+  background-color: $primary3;
+  display: flex;
+  align-items: flex-end;
+  .banner-img {
+    display: block;
+    width: 50%;
+  }
+  .banner-content {
+    width: 45%;
+    text-align: right;
+    .banner-cap {
+      color: $secondary12;
+      font-size: 1.2rem;
+    }
+    .play-btn {
+      margin-top: 1rem;
+      color: $primary10;
+      svg:hover {
+        cursor: pointer;
+        color: $primary11;
+      }
+    }
+  }
+}
+
+/* SongsList */
+$mini-player-height: 80px;
+.songs {
+  padding-bottom: $mini-player-height;
+}
+
+.song {
+  margin: 20px 0;
+  padding: 5px 0;
+  width: 100%;
+  background-color: $primary1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  &-poster {
+    height: 50px;
+    width: 50px;
+    margin-right: 10px;
+    object-fit: cover;
+    cursor: pointer;
+    opacity: 0.9;
+    &:hover {
+      opacity: 1;
+    }
+  }
+  &-info {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    &-title {
+      font-size: 1.1rem;
+      font-weight: 500;
+    }
+    &-artists {
+      font-size: 0.9rem;
+    }
+  }
+
+  &-lyrics {
+    background-color: $primary3;
+    color: $primary12;
+    height: 15px;
+    margin-right: 5px;
+    font-size: 0.8rem;
+    border-radius: 5px;
+    text-align: center;
+    padding: 2px 4px;
+    vertical-align: middle;
+  }
+
+  .duration,
+  .download {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 5px;
+    color: $secondary12;
+  }
+
+  &.playing {
+    background-color: $primary2;
+    .song-info-title,
+    .song-info-artists,
+    .duration,
+    .download {
+      color: $primary11;
+    }
+  }
+
+  &:hover {
+    background-color: $primary2;
+  }
+}
+
+/* Miniplayer */
+.mini-wrapper {
+  width: 100%;
+  height: $mini-player-height;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background-color: $primary4;
+}
+
+@keyframes text-slide {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+.mini {
+  width: 90%;
+  height: $mini-player-height;
+  margin: 0 auto;
+  border-radius: 5px;
+  background-color: $primary3;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  &-poster {
+    height: 50px;
+    width: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin: 0 5px;
+    display: inline-block;
+    cursor: pointer;
+  }
+  &-info {
+    width: 50%;
+    cursor: pointer;
+    &-title {
+      font-size: 1.1rem;
+      font-weight: 500;
+      width: 100%;
+      height: 1.1rem;
+      position: relative;
+      overflow: hidden;
+      span {
+        position: absolute;
+        animation: text-slide 18000ms linear infinite forwards 200ms;
+        margin-right: 50px;
+
+        &:nth-child(2) {
+          left: 150%;
+        }
+      }
+    }
+    &-artist {
+      font-size: 0.9rem;
+      font-weight: 400;
+    }
+  }
+  &-controls {
+    display: flex;
+    justify-content: space-between;
+    svg {
+      color: $primary10;
+      &:hover {
+        color: $primary11;
+      }
+      &:active {
+        color: $primary12;
+      }
+    }
+  }
+
+  @media screen and (min-width: 650px) {
+    width: 85%;
+    &-info {
+      width: 60%;
+    }
+    &-controls {
+      width: 30%;
+    }
+  }
+  @media screen and (min-width: 1080px) {
+    width: 80%;
+    &-info {
+      width: 70%;
+    }
+    &-controls {
+      width: 20%;
+    }
+  }
+}
+
+// ************** Playlist End *************  //
+
+/* Main player */
+.main-p {
+  height: 100vh;
+  width: 100%;
+  z-index: 2;
+  position: fixed;
+  top: 0;
+  left: 0;
+  // background-color: #e6f3ea;
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0;
+    text-align: right;
+    svg {
+      @extend %close-btn;
+      background-color: $primary2;
+      &:hover {
+        background-color: $primary3;
+      }
+    }
+  }
+
+  &-poster {
+    display: block;
+    margin: 20px auto;
+  }
+  &-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &-timing {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    span {
+      display: inline-block;
+    }
+  }
+  &-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &-lyrics {
+    margin-top: 5px;
+    text-align: center;
+    @extend %close-btn;
+    background-color: $primary4;
+    &:hover {
+      background-color: $primary5;
+    }
+  }
+}
+
+/* Lyrics */
+.lyrics {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  z-index: 3;
+  padding: 5px 0;
+  .container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: $primary2;
+  }
+
+  &-close {
+    @extend %close-btn;
+    text-align: center;
+    background-color: $primary4;
+    &:hover {
+      background-color: $primary5;
+    }
+  }
+
+  .mini-p {
+    padding: 5px;
+    margin-top: 10px;
+    border-radius: 5px;
+    background-color: $primary3;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &-poster {
+      border-radius: 5px;
+      height: 50px;
+      width: 50px;
+      display: inline-block;
+    }
+
+    &-info {
+      width: 60%;
+      display: flex;
+      flex-direction: column;
+      .title {
+        font-size: 1.1rem;
+        font-weight: 500;
+      }
+      .artists {
+        font-size: 0.9rem;
+        font-weight: 400;
+      }
+    }
+    &-controls {
+      display: flex;
+      justify-content: space-between;
+      @media screen and (min-width: 650px) {
+        width: 25%;
+      }
+      svg {
+        color: $primary10;
+        &:hover {
+          color: $primary11;
+        }
+      }
+    }
+  }
+
+  &-content {
+    margin: 20px 0;
+    overflow-y: scroll;
+    padding: 0 5px;
+    p {
+      font-size: 1.1rem;
+      line-height: 2;
+    }
+    // scrolbar
+    &::-webkit-scrollbar-track {
+      background-color: $primary2;
+    }
+
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $primary5;
+    }
+  }
+}
