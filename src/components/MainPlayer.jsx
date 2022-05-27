@@ -32,7 +32,7 @@ const MainPlayer = ({
 }) => {
   const duration = song.duration; //seconds
 
-  const openMain = () => setScreen(0);
+  const openMain = () => setScreen(1);
   const openLyrics = () => setScreen(2);
   const prev = () => changeSong(song.id - 1);
   const next = () => changeSong(song.id + 1);

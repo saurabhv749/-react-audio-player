@@ -12,6 +12,14 @@ import songs from "./db/songs";
 import { shuffleArray } from "./utils";
 const length = songs.songs.length - 1;
 const musicData = songs.songs;
+
+/**
+ *  insted of db[0] we'll use db[ copy[0] ] which will initially result in
+ *  db[0]
+ *
+ * when shuffle is on copy[0] will be some random number for the playlist
+ * so db[ copy[0] ] will be a different song from db.
+ */
 const org = Array.from({ length: 10 }).map((_, i) => i);
 let copy = Array.from({ length: 10 }).map((_, i) => i);
 
@@ -24,7 +32,14 @@ function App() {
   //current.id will give the index of currently
   // playing so we can use +1 for next and -1 for prev
 
-  const [screen, setScreen] = React.useState(0);
+  // Widget Transitions
+  const screens = ["playlist", "main-p", "lyrics"];
+  function setScreen(s) {
+    const el = document.querySelector("." + screens[s]);
+    const open = el.classList.contains("slide-up");
+    open ? el.classList.remove("slide-up") : el.classList.add("slide-up");
+  }
+  //
   const [running, setRunning] = React.useState(false);
   const [loop, setLoop] = React.useState(false);
   const [shuffle, setShuffle] = React.useState(false);
@@ -96,42 +111,38 @@ function App() {
   return (
     <div className="container">
       <audio ref={audio} src={current.url} className="audio" />
-      {screen === 0 && (
-        <Playlist
-          cover={songs.cover}
-          singers={songs.artists}
-          song={current}
-          setScreen={setScreen}
-          play={togglePlayback}
-          running={running}
-          changeSong={changeSong}
-        />
-      )}
-      {screen === 1 && (
-        <MainPlayer
-          playlist={songs.album}
-          setScreen={setScreen}
-          song={current}
-          running={running}
-          play={togglePlayback}
-          changeSong={changeSong}
-          position={position}
-          updateTime={updateTime}
-          toggleLoop={toggleLoop}
-          loop={loop}
-          shuffleMusic={shuffleMusic}
-          shuffle={shuffle}
-        />
-      )}
-      {screen === 2 && (
-        <Lyrics
-          song={current}
-          setScreen={setScreen}
-          running={running}
-          changeSong={changeSong}
-          play={togglePlayback}
-        />
-      )}
+      <Playlist
+        cover={songs.cover}
+        singers={songs.artists}
+        song={current}
+        setScreen={setScreen}
+        play={togglePlayback}
+        running={running}
+        changeSong={changeSong}
+      />
+
+      <MainPlayer
+        playlist={songs.album}
+        setScreen={setScreen}
+        song={current}
+        running={running}
+        play={togglePlayback}
+        changeSong={changeSong}
+        position={position}
+        updateTime={updateTime}
+        toggleLoop={toggleLoop}
+        loop={loop}
+        shuffleMusic={shuffleMusic}
+        shuffle={shuffle}
+      />
+
+      <Lyrics
+        song={current}
+        setScreen={setScreen}
+        running={running}
+        changeSong={changeSong}
+        play={togglePlayback}
+      />
     </div>
   );
 }

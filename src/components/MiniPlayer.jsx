@@ -11,7 +11,6 @@ const MiniPlayer = ({ setScreen, song, running, changeSong, play }) => {
   const openMain = () => setScreen(1);
   const prev = () => changeSong(song.id - 1);
   const next = () => changeSong(song.id + 1);
-  // console.log(song.id);
   return (
     <section className="mini-wrapper">
       <div className="mini">

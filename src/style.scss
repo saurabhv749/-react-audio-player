@@ -307,7 +307,8 @@ $mini-player-height: 80px;
   position: fixed;
   top: 0;
   left: 0;
-  // background-color: #e6f3ea;
+
+  transform: translateY(100vh);
   .container {
     display: flex;
     flex-direction: column;
@@ -320,6 +321,7 @@ $mini-player-height: 80px;
     justify-content: space-between;
     padding: 20px 0;
     text-align: right;
+    color: $primary11;
     svg {
       @extend %close-btn;
       background-color: $primary2;
@@ -368,6 +370,8 @@ $mini-player-height: 80px;
   position: fixed;
   top: 0;
   left: 0;
+  transform: translateY(100vh);
+
   height: 100vh;
   width: 100%;
   z-index: 3;
@@ -453,4 +457,14 @@ $mini-player-height: 80px;
       background-color: $primary5;
     }
   }
+}
+
+/* Animate screens */
+.main-p,
+.lyrics {
+  transition: transform 400ms ease;
+  background-color: $primary1;
+}
+.slide-up {
+  transform: translateY(0);
 }

@@ -11,8 +11,7 @@ import RippleButton from "./RippleButton";
 const Lyrics = ({ setScreen, song, running, changeSong, play }) => {
   const prev = () => changeSong(song.id - 1);
   const next = () => changeSong(song.id + 1);
-  // console.log(song);
-  const openMain = () => setScreen(1);
+  const openMain = () => setScreen(2);
   return (
     <section className="lyrics">
       <div className="container">
@@ -53,42 +52,3 @@ const Lyrics = ({ setScreen, song, running, changeSong, play }) => {
 };
 
 export default Lyrics;
-
-// const songLyrics = `Some keep a diary;
-// Seems like a fantasy;
-// But it may require some love and desire;
-// It's something to cover me;
-// There's never a guarantee;
-// That loving is so easy;
-// Some may define it as sugar and brownies;
-// But sour just as lime is;
-// Uhh na na na uhh na na na na na na.. na na na;
-// Uhh na na na uhh na na na na na na.. na na na;
-// Uhh na na na na na uhh na na na na na;
-// Uhh na na na na na uhh na na na na na;
-// Son of the ocean breeze;
-// Somewhere you promised me;
-// A love like a fire, no fears, no denial;
-// Just something to gladden me;
-// I feel electricity;
-// Your lighting is guiding me;
-// I fear that I like it;
-// No place we can hide it;
-// So hard not to find it;
-// Uhh na na na uhh na na na na na na.. na na na;
-// Uhh na na na uhh na na na na na na.. na na na;
-// Uhh na na na na na uhh na na na na na;
-// Uhh na na na na na uhh na na na na na;
-// The reason why we don't give up on our love is simple;
-// We're like the sun and moon;
-// We like to see each other shining bright;
-// We have tonight, tomorrow;
-// And the other days that follow;
-// We have to try to make things right;
-// I'll sing to you like;
-// Uhh na na na uhh na na na na na na.. na na na;
-// Uhh na na na uhh na na na na na na.. na na na;
-// Uhh na na na na na uhh na na na na na;
-// Uhh na na na na uhh na na na na na na;
-// The reason the reason the reason why ...
-// `.split(";");
