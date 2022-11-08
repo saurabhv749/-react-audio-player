@@ -515,7 +515,7 @@ Ho Ho Ho Ho Ho…`,
     {
       id: 6,
       title: "Mast Nazron Se",
-      poster: "https://pagalworld.com.se/siteuploads/thumb/sft11/5466_4.jpg",
+      poster: "https://i.scdn.co/image/ab67616d0000b273ad703a8ded84a3645348e087",
       url: "https://pagalnew.com/mp3-songs/indipop-mp3-songs/mast-nazron-se-rochak-kohli-128-kbps-sound.mp3",
       artists: ["Jubin Nautiyal"],
       album: "Mast Nazron Se - Jubin Nautiyal",
